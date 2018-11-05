@@ -1,46 +1,31 @@
 #pragma once
 #include <string>
+#include <sstream>
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <algorithm>
 using namespace std;
 class contact
 {
 private:
-	//Number
-	//Gender
-	//Title
-	//GivenName
-	//MiddleInitial
-	//Surname
-	//StreetAddress
-	//City
-	//State
-	//ZipCode
-	//EmailAddress
-	//Birthday
+	const int columNum = 12;
+	int fileSize;
+	string** data = new string *[columNum];
 
 public:
 	contact();
 	~contact();
 
-	//setter
-	//getter
-	//search
-		//Number
-		//Gender
-		//Title
-	//GivenName
-	string firstName();
-		//MiddleInitial
-	//Surname
-	string lastName();
-		//StreetAddress
-	//City
-	string city();
-		//State
-		//ZipCode
-		//EmailAddress
-		//Birthday
+	//file size checker
+	int checkSize(string fileName);
 
+	//setter
+	void setData(string fileName);
+	//getters
+	void getAll();
+	void getFound(vector<int> locations);
+	//sort into alphabetical order
+	void search(int colum, string get);
 };
 
