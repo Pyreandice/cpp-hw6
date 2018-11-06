@@ -10,22 +10,28 @@ class contact
 {
 private:
 	const int columNum = 12;
+
 	int fileSize;
 	string** data = new string *[columNum];
+	//file size checker
+	int checkSize(string fileName);
+	void resize(int change);
 
 public:
 	contact();
 	~contact();
 
-	//file size checker
-	int checkSize(string fileName);
-
+	
 	//setter
 	void setData(string fileName);
 	//getters
 	void getAll();
 	void getFound(vector<int> locations);
-	//sort into alphabetical order
+	//find
 	void search(int colum, string get);
+	//delete
+	void deleteContact(vector<int> locations);
+	//add new
+	void addNew(string Ncontact);
 };
 
