@@ -26,9 +26,9 @@ public:
 	void setData(string fileName);
 	//getters
 	void getAll();
-	void getFound(vector<int> locations);
+	vector<string> getFound(vector<int> locations);
 	//find
-	void search(int colum, string get);
+	vector<int> search(int colum, string get);
 	//delete
 	void deleteContact(vector<int> locations);
 	//add new

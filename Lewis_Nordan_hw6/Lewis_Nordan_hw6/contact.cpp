@@ -41,12 +41,9 @@ void contact::resize(int change)
 
 	// coppy all the data into a temp holder removing any lines marked for deletion
 	for (int x = 0; x < (fileSize + change); x++) {
-		//cout << "row :" << x << endl;
-		//cout << "counter= " << counter << endl;
 		for (int y = 0; y < columNum; y++) {
 			if (data[y][counter] != "N/A") {
 				if (counter >= fileSize) {
-					//cout << "counter= " << counter << endl;
 					counter = -1;
 					break;
 				}
@@ -59,10 +56,6 @@ void contact::resize(int change)
 			}
 		}
 		counter++;
-		/*if (test) {
-			test = false;
-			counter++;
-		}*/
 		if (counter == -1) {
 			break;
 		}
@@ -80,9 +73,6 @@ void contact::resize(int change)
 	}
 	// deallocate the holder
 	delete[] temp;
-	/*for (int x = 0; x < fileSize; x++) {
-		cout << data[0][x] << "--" << x << endl;
-	}*/
 }
 
 /*
@@ -112,10 +102,8 @@ void contact::setData(string fileName)
 		int x = 0;
 		while (getline(s, dataPoint, ',')) {
 			data[x][y] = dataPoint;
-			//cout << data[x][y];
 			x++;
 		}
-		//cout << endl;
 	}
 	myFile.close();
 }
@@ -144,24 +132,27 @@ void contact::getAll()
 	outFile.close();
 }
 
-void contact::getFound(vector<int> locations)
+vector<string> contact::getFound(vector<int> locations)
 {
+	vector<string> results;
+	string glue = "";
 	for (int x = 0; x < locations.size(); x++) {
 		for (int y = 0; y < columNum; y++) {
 			
 			if (y < columNum - 1) {
-				cout << data[y][locations[x]]<<", ";
+				glue += data[y][locations[x]] +", ";
 			}
 			else if (y == columNum - 1) {
-				cout << data[y][locations[x]];
+				glue+= data[y][locations[x]];
 			}
 		}
-		cout << endl;
+		results.push_back(glue);
+		glue = "";
 	}
-	cout << "there are " << locations.size() << " results." << endl;
+	return results;
 }
 
-void contact::search(int colum, string get)
+vector<int> contact::search(int colum, string get)
 {
 	vector<int> rows;
 	for (int x = 0; x < fileSize; x++) {
@@ -169,10 +160,8 @@ void contact::search(int colum, string get)
 			rows.push_back(x);
 		}
 	}
-	getFound(rows);
-	// break this into its own function
-	// ask user if they wish to delete the data
-	deleteContact(rows);
+	//getFound(rows);
+	return rows;
 }
 
 void contact::deleteContact(vector<int> locations)
@@ -184,14 +173,13 @@ void contact::deleteContact(vector<int> locations)
 		}
 		numDeleted--;
 	}
-	//resize(numDeleted);
+	resize(numDeleted);
 	cout << abs(numDeleted) << " contacts deleted." << endl;
 }
 
  void contact::addNew(string Ncontact){
 	cout << "making room" << endl;
 	resize(1);
-	//cout << "--" << endl;
 	
 	for (int x = 0; x < fileSize; x++) {
 		cout << data[0][x] << "--" << endl;;
