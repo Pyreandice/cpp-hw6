@@ -39,12 +39,14 @@ void contact::resize(int change)
 	int counter = 0;
 	bool test = true;
 
+	// coppy all the data into a temp holder removing any lines marked for deletion
 	for (int x = 0; x < (fileSize + change); x++) {
 		//cout << "row :" << x << endl;
 		//cout << "counter= " << counter << endl;
 		for (int y = 0; y < columNum; y++) {
 			if (data[y][counter] != "N/A") {
 				if (counter >= fileSize) {
+					//cout << "counter= " << counter << endl;
 					counter = -1;
 					break;
 				}
@@ -55,23 +57,32 @@ void contact::resize(int change)
 				test = false;
 				break;
 			}
-		}	
-		if (test) {
+		}
+		counter++;
+		/*if (test) {
 			test = false;
 			counter++;
-		}
-		else if (counter == -1) {
+		}*/
+		if (counter == -1) {
 			break;
 		}
-		else {
-			counter++;
+		else if (test == false) {
 			x--;
 		}
 	}
+	//update the size of the file
 	fileSize = fileSize + change;
-	data = temp;
-	
+	// reallocate the memory to fit the data properly and replace the data
+	for (int x = 0; x < columNum; x++) {
+		delete[] data[x];
+		data[x] = new string[fileSize];
+		data[x] = temp[x];
+	}
+	// deallocate the holder
 	delete[] temp;
+	/*for (int x = 0; x < fileSize; x++) {
+		cout << data[0][x] << "--" << x << endl;
+	}*/
 }
 
 /*
@@ -95,7 +106,7 @@ void contact::setData(string fileName)
 	ifstream myFile;
 	myFile.open(fileName);
 	for (int y = 0; y < fileSize; y++) {
-		//cout << "currently on row number: " << y << " of " << fileSize << endl;
+		
 		getline(myFile, line);
 		istringstream s(line);
 		int x = 0;
@@ -180,6 +191,12 @@ void contact::deleteContact(vector<int> locations)
  void contact::addNew(string Ncontact){
 	cout << "making room" << endl;
 	resize(1);
+	//cout << "--" << endl;
+	
+	for (int x = 0; x < fileSize; x++) {
+		cout << data[0][x] << "--" << endl;;
+	}
+	cout << "new size = " << fileSize << endl;
 	string temp = "";
 	istringstream s(Ncontact);
 	for (int x = 0; x < columNum; x++) {
@@ -187,4 +204,8 @@ void contact::deleteContact(vector<int> locations)
 		data[x][(fileSize - 1)] = temp;
 	}
 }
+
+ void contact::sortall()
+ {
+ }
 

@@ -33,5 +33,7 @@ public:
 	void deleteContact(vector<int> locations);
 	//add new
 	void addNew(string Ncontact);
+	//sort the data
+	void sortall();
 };
 
