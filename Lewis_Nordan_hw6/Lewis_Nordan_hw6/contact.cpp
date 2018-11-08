@@ -195,5 +195,40 @@ void contact::deleteContact(vector<int> locations)
 
  void contact::sortall()
  {
+	 const int sortcolum[2] = { 3,5 };
+	 const int size = 2;
+	 const string = "";
+	 int numMoved = 0;
+	 bool first = false;
+	 bool second = false;
+
+
+	 for (int stage = 0; stage < size; stage++) {
+		 //x and z are for looping over the first names in a bubble sort
+		 for (int z = 1; z < fileSize; z++) {
+			 for (int x = 1; x < fileSize; x++) {
+				
+				 if (stage == 1) {
+
+				 }
+				 else if (stage == 0) {
+					 //checks if data needs to be moved
+					 if (data[(sortcolum[stage])][x] > data[(sortcolum[stage])][x + 1] && x + 1 < fileSize) {
+						 numMoved++;
+						 //moves the data
+						 for (int y = 0; y < columNum; y++) {
+							 data[y][x].swap(data[y][x + 1]);
+						 }
+					 }
+				 }
+			 
+			 
+			 
+			 }
+			 cout << numMoved << "--" << z << endl;
+			 //system("pause");
+		 }
+	 }
+	 getAll();
  }
 
