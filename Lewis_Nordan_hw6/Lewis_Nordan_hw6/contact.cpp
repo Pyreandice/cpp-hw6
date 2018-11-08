@@ -107,7 +107,7 @@ void contact::setData(string fileName)
 	}
 	myFile.close();
 }
-
+//places everything into a file
 void contact::getAll()
 {
 	ofstream outFile;
@@ -195,9 +195,9 @@ void contact::deleteContact(vector<int> locations)
 
  void contact::sortall()
  {
-	 const int sortcolum[2] = { 3,5 };
+	 const int sortcolum[2] = { 5.3 };
 	 const int size = 2;
-	 const string = "";
+	 //const string = "";
 	 int numMoved = 0;
 	 bool first = false;
 	 bool second = false;
@@ -213,21 +213,36 @@ void contact::deleteContact(vector<int> locations)
 				 }
 				 else if (stage == 0) {
 					 //checks if data needs to be moved
-					 if (data[(sortcolum[stage])][x] > data[(sortcolum[stage])][x + 1] && x + 1 < fileSize) {
-						 numMoved++;
-						 //moves the data
-						 for (int y = 0; y < columNum; y++) {
-							 data[y][x].swap(data[y][x + 1]);
+					 
+					 if (stage == 1) {
+						 if (data[(sortcolum[stage])][x] > data[(sortcolum[stage])][x + 1] && x + 1 < fileSize) {
+							 numMoved++;
+							 //moves the data
+							 for (int y = 0; y < columNum; y++) {
+								 data[y][x].swap(data[y][x + 1]);
+							 }
 						 }
 					 }
+					 else {
+						 if (data[(sortcolum[stage])][x] > data[(sortcolum[stage])][x + 1] && x + 1 < fileSize) {
+							 numMoved++;
+							 //moves the data
+							 for (int y = 0; y < columNum; y++) {
+								 data[y][x].swap(data[y][x + 1]);
+							 }
+						 }
+					 }
+
 				 }
-			 
-			 
-			 
+
 			 }
 			 cout << numMoved << "--" << z << endl;
 			 //system("pause");
 		 }
+
+
+
+
 	 }
 	 getAll();
  }
